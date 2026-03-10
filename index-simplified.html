@@ -1,0 +1,1318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NYIT AI-Integrated FinTech Certificates | Learn. Build. Lead.</title>
+    <style>
+        /* ===== CSS CUSTOM PROPERTIES ===== */
+        :root {
+            --nyit-teal: #0D9488;
+            --nyit-teal-light: #10B981;
+            --nyit-teal-dark: #0F766E;
+            --nyit-navy: #002856;
+            --nyit-navy-dark: #001a3a;
+            --nyit-blue: #0066CC;
+            --nyit-blue-light: #E3F2FD;
+            --bg-light: #F8F9FA;
+            --bg-white: #FFFFFF;
+            --text-primary: #1a1a2e;
+            --text-secondary: #4a5568;
+            --text-muted: #718096;
+            --border-color: #E2E8F0;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 30px rgba(0,0,0,0.12);
+            --radius-sm: 6px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* ===== RESET & BASE ===== */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; font-size: 16px; }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text-primary); line-height: 1.7; background: var(--bg-white); overflow-x: hidden;
+        }
+
+        /* ===== TYPOGRAPHY ===== */
+        h1, h2, h3, h4, h5 { font-weight: 700; line-height: 1.2; letter-spacing: -0.02em; }
+        h1 { font-size: clamp(2rem, 5vw, 3.2rem); }
+        h2 { font-size: clamp(1.6rem, 3.5vw, 2.4rem); }
+        h3 { font-size: clamp(1.2rem, 2.5vw, 1.5rem); }
+        h4 { font-size: 1.15rem; }
+        p { margin-bottom: 1rem; }
+        .section-label {
+            display: inline-block; font-size: 0.75rem; font-weight: 700;
+            letter-spacing: 0.15em; text-transform: uppercase; color: var(--nyit-teal);
+            background: rgba(13, 148, 136, 0.1); padding: 6px 16px; border-radius: 50px; margin-bottom: 1rem;
+        }
+        .section-title { color: var(--nyit-navy); margin-bottom: 1rem; }
+        .section-subtitle { font-size: 1.1rem; color: var(--text-secondary); max-width: 700px; line-height: 1.8; }
+
+        /* ===== LAYOUT ===== */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        .section { padding: 80px 0; }
+        .section-alt { background: var(--bg-light); }
+        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+        .text-center { text-align: center; }
+        .mx-auto { margin-left: auto; margin-right: auto; }
+        .divider { width: 60px; height: 3px; background: var(--nyit-teal); margin: 20px 0 32px 0; border-radius: 2px; }
+        .divider.center { margin-left: auto; margin-right: auto; }
+        .card {
+            background: var(--bg-white); border: 1px solid var(--border-color);
+            border-radius: var(--radius-md); padding: 24px; transition: var(--transition);
+        }
+        .card:hover { box-shadow: var(--shadow-md); }
+
+        /* ===== NAVIGATION ===== */
+        .nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            background: rgba(0, 40, 86, 0.97); backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255,255,255,0.08); transition: var(--transition);
+        }
+        .nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.3); }
+        .nav-inner {
+            display: flex; align-items: center; justify-content: space-between;
+            height: 64px; max-width: 1200px; margin: 0 auto; padding: 0 24px;
+        }
+        .nav-brand {
+            display: flex; align-items: center; gap: 12px; text-decoration: none;
+            color: #fff; font-weight: 700; font-size: 1.05rem;
+        }
+        .nav-brand .brand-icon {
+            width: 36px; height: 36px; background: var(--nyit-teal); border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 900; font-size: 0.7rem; color: #fff; letter-spacing: 0.05em;
+        }
+        .nav-links { display: flex; list-style: none; gap: 4px; }
+        .nav-links a {
+            display: block; color: rgba(255,255,255,0.75); text-decoration: none;
+            font-size: 0.82rem; font-weight: 500; padding: 8px 14px;
+            border-radius: 6px; transition: var(--transition);
+        }
+        .nav-links a:hover, .nav-links a.active { color: #fff; background: rgba(255,255,255,0.1); }
+        .nav-toggle { display: none; background: none; border: none; color: #fff; font-size: 1.5rem; cursor: pointer; }
+        @media (max-width: 900px) {
+            .nav-toggle { display: block; }
+            .nav-links {
+                display: none; position: absolute; top: 64px; left: 0; right: 0;
+                background: var(--nyit-navy); flex-direction: column; padding: 16px;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+            }
+            .nav-links.open { display: flex; }
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            position: relative; min-height: 85vh; display: flex; align-items: center;
+            background: linear-gradient(135deg, var(--nyit-navy) 0%, var(--nyit-navy-dark) 60%, #001030 100%);
+            padding-top: 80px; overflow: hidden;
+        }
+        .hero-grid {
+            position: absolute; inset: 0;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+        .hero-content { position: relative; z-index: 1; max-width: 800px; }
+        .hero-badge {
+            display: inline-block; font-size: 0.75rem; font-weight: 700;
+            letter-spacing: 0.15em; text-transform: uppercase;
+            color: var(--nyit-teal-light); background: rgba(13, 148, 136, 0.15);
+            padding: 8px 20px; border-radius: 50px; margin-bottom: 24px;
+            border: 1px solid rgba(13, 148, 136, 0.25);
+        }
+        .hero h1 { color: #fff; margin-bottom: 20px; }
+        .hero .teal { color: var(--nyit-teal-light); }
+        .hero-tagline { color: rgba(255,255,255,0.75); font-size: 1.15rem; line-height: 1.8; max-width: 650px; }
+        .hero-stats { display: flex; gap: 36px; margin-top: 40px; flex-wrap: wrap; }
+        .hero-stat .number { font-size: 1.8rem; font-weight: 800; color: var(--nyit-teal-light); }
+        .hero-stat .label { font-size: 0.78rem; color: rgba(255,255,255,0.55); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 4px; }
+        .hero-cta {
+            display: inline-flex; align-items: center; gap: 8px; margin-top: 36px;
+            padding: 14px 32px; background: var(--nyit-teal); color: #fff;
+            font-weight: 700; font-size: 0.95rem; text-decoration: none;
+            border-radius: var(--radius-sm); transition: var(--transition);
+        }
+        .hero-cta:hover { background: var(--nyit-teal-light); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(13,148,136,0.3); }
+
+        /* ===== THESIS BANNER ===== */
+        .thesis-banner { background: var(--nyit-teal); padding: 28px 0; }
+        .thesis-content { text-align: center; }
+        .thesis-quote { font-size: 1.3rem; font-weight: 700; color: #fff; margin-bottom: 6px; }
+        .thesis-quote .highlight { color: var(--nyit-navy); }
+        .thesis-sub { font-size: 0.92rem; color: rgba(255,255,255,0.85); max-width: 700px; margin: 0 auto; }
+
+        /* ===== LOGIC FLOW ===== */
+        .logic-flow {
+            display: flex; align-items: center; justify-content: center; gap: 16px;
+            flex-wrap: wrap; margin: 40px 0 20px;
+        }
+        .logic-step {
+            background: var(--bg-white); border: 2px solid var(--border-color);
+            border-radius: var(--radius-md); padding: 20px 28px; text-align: center;
+            min-width: 200px; transition: var(--transition);
+        }
+        .logic-step:hover { border-color: var(--nyit-teal); box-shadow: var(--shadow-md); }
+        .logic-step .step-num {
+            font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em;
+            color: var(--text-muted); margin-bottom: 6px;
+        }
+        .logic-step h4 { color: var(--nyit-navy); font-size: 1rem; }
+        .logic-step p { font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 0; margin-top: 4px; }
+        .logic-arrow { font-size: 1.5rem; color: var(--nyit-teal); font-weight: 700; }
+        @media (max-width: 700px) {
+            .logic-arrow { transform: rotate(90deg); }
+            .logic-flow { flex-direction: column; }
+        }
+
+        /* ===== CLUSTER CARDS ===== */
+        .cluster-card {
+            background: var(--bg-white); border: 1px solid var(--border-color);
+            border-radius: var(--radius-md); padding: 20px; transition: var(--transition);
+        }
+        .cluster-card:hover { box-shadow: var(--shadow-md); }
+        .cluster-card h4 { color: var(--nyit-navy); margin-bottom: 2px; }
+        .cluster-subtitle { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 12px; }
+        .cluster-stat-row {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 6px 0; border-bottom: 1px solid #f0f0f0; font-size: 0.85rem;
+        }
+        .cluster-stat-row:last-child { border-bottom: none; }
+        .stat-label { color: var(--text-secondary); }
+        .stat-value { font-weight: 600; color: var(--text-primary); }
+
+        /* ===== WAVE CARDS ===== */
+        .wave-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; margin: 24px 0; }
+        .wave-card {
+            border-radius: var(--radius-md); padding: 20px 24px; border-left: 4px solid;
+        }
+        .wave-card.wave-1 { background: rgba(13,148,136,0.06); border-color: var(--nyit-teal); }
+        .wave-card.wave-2 { background: rgba(0,40,86,0.04); border-color: var(--nyit-navy); }
+        .wave-card.wave-3 { background: rgba(13,148,136,0.03); border-color: var(--nyit-teal-dark); }
+        .wave-card h4 { margin-bottom: 8px; font-size: 0.95rem; }
+        .wave-card p { font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0; }
+        .wave-card strong { color: var(--nyit-navy); }
+
+        /* ===== GAP SECTION ===== */
+        .gap-universal {
+            background: linear-gradient(135deg, var(--nyit-navy), var(--nyit-navy-dark));
+            border-radius: var(--radius-md); padding: 28px 32px; margin-top: 32px;
+        }
+        .gap-universal h3 { color: var(--nyit-teal-light); margin-bottom: 12px; }
+        .gap-universal p { color: rgba(255,255,255,0.8); margin-bottom: 0; }
+        .gap-universal .highlight { color: var(--nyit-teal-light); font-weight: 700; }
+
+        /* ===== CERTIFICATE CARDS ===== */
+        .cert-card {
+            background: var(--bg-white); border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg); overflow: hidden; transition: var(--transition);
+        }
+        .cert-card:hover { box-shadow: var(--shadow-lg); }
+        .cert-header { padding: 28px 28px 20px; border-bottom: 1px solid var(--border-color); }
+        .cert-number {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 36px; height: 36px; border-radius: 50%; font-weight: 800; font-size: 1rem;
+            margin-bottom: 12px; color: #fff;
+        }
+        .cert-1 .cert-number { background: var(--nyit-teal); }
+        .cert-2 .cert-number { background: var(--nyit-navy); }
+        .cert-3 .cert-number { background: var(--nyit-teal-dark); }
+        .cert-header h3 { margin-bottom: 6px; }
+        .cert-header .cert-subtitle { font-size: 0.92rem; color: var(--text-secondary); margin-bottom: 12px; }
+        .cert-meta { display: flex; gap: 16px; flex-wrap: wrap; font-size: 0.82rem; color: var(--text-muted); }
+        .cert-meta span { display: flex; align-items: center; gap: 4px; }
+        .cert-body { padding: 24px 28px; }
+        .cert-who {
+            background: var(--bg-light); border-radius: var(--radius-sm);
+            padding: 14px 16px; margin-bottom: 20px; font-size: 0.88rem;
+        }
+        .cert-who strong { color: var(--nyit-navy); }
+        .cert-module-toggle {
+            width: 100%; background: none; border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm); padding: 12px 16px;
+            font-size: 0.88rem; font-weight: 600; color: var(--nyit-navy);
+            cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+            transition: var(--transition);
+        }
+        .cert-module-toggle:hover { background: var(--bg-light); }
+        .cert-module-toggle .toggle-arrow { transition: transform 0.3s; }
+        .cert-module-toggle.open .toggle-arrow { transform: rotate(180deg); }
+        .cert-module-list { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+        .cert-module-list.open { max-height: 3000px; }
+        .module-item { padding: 16px 0; border-bottom: 1px solid #f0f0f0; }
+        .module-item:last-child { border-bottom: none; }
+        .module-item h5 { color: var(--nyit-navy); margin-bottom: 6px; font-size: 0.95rem; }
+        .module-item p { font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 8px; }
+        .module-objectives { list-style: none; padding: 0; margin: 8px 0; }
+        .module-objectives li {
+            font-size: 0.83rem; color: var(--text-secondary); padding: 3px 0 3px 18px; position: relative;
+        }
+        .module-objectives li::before { content: "\2713"; position: absolute; left: 0; color: var(--nyit-teal); font-weight: 700; }
+        .tool-tag {
+            display: inline-block; background: rgba(13,148,136,0.1); color: var(--nyit-teal-dark);
+            font-size: 0.72rem; font-weight: 600; padding: 3px 10px;
+            border-radius: 50px; margin: 2px 4px 2px 0;
+        }
+        .module-deliverable {
+            font-size: 0.83rem; color: var(--text-secondary); margin-top: 8px;
+            padding: 8px 12px; background: #fafafa; border-radius: var(--radius-sm);
+            border-left: 3px solid var(--nyit-teal);
+        }
+        .cert-capstone {
+            background: linear-gradient(135deg, var(--nyit-navy), var(--nyit-navy-dark));
+            border-radius: var(--radius-sm); padding: 20px; margin-top: 20px;
+        }
+        .capstone-label {
+            font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.1em; color: var(--nyit-teal-light); margin-bottom: 6px;
+        }
+        .cert-capstone h5 { color: #fff; margin-bottom: 6px; font-size: 1rem; }
+        .cert-capstone p { color: rgba(255,255,255,0.75); font-size: 0.85rem; margin-bottom: 0; }
+        .project-options { margin-top: 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+        .project-option {
+            background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12);
+            border-radius: var(--radius-sm); padding: 10px 12px; font-size: 0.8rem; color: rgba(255,255,255,0.8);
+        }
+        .project-option strong { color: var(--nyit-teal-light); font-size: 0.72rem; display: block; margin-bottom: 2px; }
+        @media (max-width: 600px) { .project-options { grid-template-columns: 1fr; } }
+        .cert-ms {
+            margin-top: 16px; padding: 14px 16px; border-left: 3px solid var(--nyit-navy);
+            background: #f8fafc; border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+        }
+        .ms-label {
+            font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.1em; color: var(--nyit-navy); margin-bottom: 6px;
+        }
+        .ms-course-tag {
+            display: inline-block; background: var(--nyit-navy); color: #fff;
+            font-size: 0.72rem; font-weight: 600; padding: 3px 10px;
+            border-radius: 50px; margin: 2px 4px 2px 0;
+        }
+        .cert-ms p { font-size: 0.82rem; color: var(--text-secondary); margin-top: 8px; margin-bottom: 0; }
+
+        /* ===== COMPETITIVE ===== */
+        .competitor-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .competitor-card {
+            background: var(--bg-white); border: 1px solid var(--border-color);
+            border-radius: var(--radius-md); padding: 24px; transition: var(--transition);
+        }
+        .competitor-card:hover { box-shadow: var(--shadow-md); }
+        .competitor-card h4 { color: var(--nyit-navy); margin-bottom: 4px; }
+        .comp-type { font-size: 0.82rem; color: var(--nyit-teal); font-weight: 600; margin-bottom: 10px; }
+        .competitor-card p { font-size: 0.85rem; color: var(--text-secondary); }
+        .comp-price {
+            display: inline-block; margin-top: 8px; font-size: 0.82rem; font-weight: 700;
+            color: var(--text-muted); background: var(--bg-light); padding: 4px 12px; border-radius: 50px;
+        }
+        .nyit-position {
+            background: linear-gradient(135deg, var(--nyit-navy), var(--nyit-navy-dark));
+            border-radius: var(--radius-md); padding: 32px; margin-top: 32px;
+        }
+        .nyit-position h3 { color: var(--nyit-teal-light); margin-bottom: 16px; }
+        .nyit-position p { color: rgba(255,255,255,0.8); }
+        .position-hooks { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px; }
+        .hook-item {
+            background: rgba(255,255,255,0.06); border-left: 3px solid var(--nyit-teal);
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+            padding: 12px 16px; font-size: 0.88rem; color: rgba(255,255,255,0.8);
+        }
+        .hook-label {
+            display: block; font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.1em; color: var(--nyit-teal-light); margin-bottom: 4px;
+        }
+        @media (max-width: 700px) { .position-hooks { grid-template-columns: 1fr; } }
+
+        /* ===== ROI CHART ===== */
+        .roi-chart { margin: 24px 0; }
+        .roi-bar-group { margin-bottom: 20px; }
+        .roi-bar-label { font-size: 0.85rem; font-weight: 600; color: var(--text-primary); display: block; margin-bottom: 8px; }
+        .roi-bars { display: flex; flex-direction: column; gap: 4px; }
+        .roi-bar {
+            height: 32px; border-radius: var(--radius-sm); display: flex; align-items: center;
+            padding: 0 12px; font-size: 0.78rem; font-weight: 600; width: 0; transition: width 1s ease;
+        }
+        .roi-bar.animated { width: var(--target-width); }
+        .roi-bar.current { background: #e2e8f0; color: var(--text-secondary); }
+        .roi-bar.ai-enabled { background: linear-gradient(90deg, var(--nyit-teal), var(--nyit-teal-light)); color: #fff; }
+
+        /* ===== PRICING ===== */
+        .pricing-section { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start; }
+        @media (max-width: 800px) { .pricing-section { grid-template-columns: 1fr; } }
+        .pricing-card {
+            background: linear-gradient(135deg, var(--nyit-navy), var(--nyit-navy-dark));
+            border-radius: var(--radius-lg); padding: 36px; text-align: center;
+        }
+        .pricing-card .price { font-size: 3.5rem; font-weight: 800; color: var(--nyit-teal-light); }
+        .pricing-card .price-unit { font-size: 1.1rem; color: rgba(255,255,255,0.7); margin-bottom: 16px; }
+        .pricing-card .price-rationale { font-size: 0.88rem; color: rgba(255,255,255,0.6); margin-bottom: 0; }
+        .bundle-card {
+            background: var(--bg-white); border: 2px solid var(--nyit-teal);
+            border-radius: var(--radius-lg); padding: 28px; text-align: center;
+        }
+        .bundle-card .bundle-label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--nyit-teal); margin-bottom: 4px; }
+        .bundle-card .bundle-price { font-size: 2.2rem; font-weight: 800; color: var(--nyit-navy); }
+        .bundle-card .bundle-savings { font-size: 0.88rem; font-weight: 600; color: var(--text-muted); margin-bottom: 8px; }
+        .bundle-card .bundle-detail { font-size: 0.83rem; color: var(--text-secondary); margin-bottom: 0; }
+        .comp-price-row {
+            display: flex; justify-content: space-between; padding: 10px 0;
+            border-bottom: 1px solid var(--border-color); font-size: 0.88rem;
+        }
+        .comp-price-row:last-child { border-bottom: none; }
+        .comp-name { color: var(--text-secondary); }
+        .comp-cost { font-weight: 600; color: var(--text-primary); }
+        .comp-price-row.nyit-row { background: rgba(13,148,136,0.08); border-radius: var(--radius-sm); padding: 10px 12px; margin-top: 4px; }
+        .comp-price-row.nyit-row .comp-name { color: var(--nyit-navy); font-weight: 700; }
+        .comp-price-row.nyit-row .comp-cost { color: var(--nyit-teal); font-weight: 800; }
+
+        /* ===== BAR CHART ===== */
+        .bar-chart { margin: 24px 0; }
+        .bar-chart-title { font-size: 1rem; color: var(--nyit-navy); margin-bottom: 16px; }
+        .bar-row { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 200px; font-size: 0.82rem; font-weight: 600; color: var(--text-primary); flex-shrink: 0; }
+        .bar-track { flex: 1; background: #f1f5f9; border-radius: var(--radius-sm); height: 32px; overflow: hidden; }
+        .bar-fill {
+            height: 100%; border-radius: var(--radius-sm); display: flex; align-items: center;
+            padding: 0 12px; font-size: 0.78rem; font-weight: 600; color: #fff;
+            width: 0; transition: width 1s ease;
+        }
+        .bar-fill.animated { width: var(--target-width); }
+        .bar-fill.navy { background: var(--nyit-navy); }
+        .bar-fill.teal { background: var(--nyit-teal); }
+        .bar-fill.teal-dark { background: var(--nyit-teal-dark); }
+        @media (max-width: 600px) {
+            .bar-row { flex-direction: column; align-items: flex-start; }
+            .bar-label { width: 100%; margin-bottom: 4px; }
+        }
+
+        /* ===== STEPS ===== */
+        .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 32px; }
+        .step-card {
+            background: var(--bg-white); border: 1px solid var(--border-color);
+            border-radius: var(--radius-md); padding: 24px; position: relative;
+            padding-top: 48px; transition: var(--transition);
+        }
+        .step-card:hover { box-shadow: var(--shadow-md); border-color: var(--nyit-teal); }
+        .step-number {
+            position: absolute; top: -1px; left: 24px;
+            background: var(--nyit-teal); color: #fff;
+            width: 36px; height: 36px; border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+            display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1rem;
+        }
+        .step-card h4 { color: var(--nyit-navy); margin-bottom: 8px; }
+        .step-card p { font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 0; }
+
+        /* ===== CLOSING & FOOTER ===== */
+        .closing-cta {
+            background: linear-gradient(135deg, var(--nyit-navy), var(--nyit-navy-dark));
+            padding: 60px 0; text-align: center;
+        }
+        .closing-cta .cta-tagline { color: var(--nyit-teal-light); font-size: 1.2rem; font-style: italic; margin-bottom: 16px; }
+        .closing-cta h2 { color: #fff; margin-bottom: 16px; }
+        .closing-cta p { color: rgba(255,255,255,0.6); font-size: 0.95rem; max-width: 600px; margin: 0 auto; }
+        .footer { background: #0a0a1a; padding: 24px 0; text-align: center; }
+        .footer p { font-size: 0.78rem; color: rgba(255,255,255,0.4); margin-bottom: 0; }
+        .footer a { color: rgba(255,255,255,0.5); }
+
+        /* ===== ANIMATIONS ===== */
+        .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+        /* ===== PATHWAY TABLE ===== */
+        .pathway-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; margin-top: 16px; }
+        .pathway-table th {
+            background: var(--nyit-navy); color: #fff; padding: 12px 16px;
+            text-align: left; font-size: 0.82rem; font-weight: 600;
+        }
+        .pathway-table td { padding: 12px 16px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary); }
+        .pathway-table tr:hover td { background: var(--bg-light); }
+    </style>
+</head>
+<body>
+
+    <nav class="nav" id="nav">
+        <div class="nav-inner">
+            <a href="#hero" class="nav-brand">
+                <span class="brand-icon">NYIT</span>
+                AI FinTech Certificates
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">&#9776;</button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#opportunity">The Opportunity</a></li>
+                <li><a href="#gap">The Gap</a></li>
+                <li><a href="#certificates">3 Certificates</a></li>
+                <li><a href="#competitive">Why NYIT</a></li>
+                <li><a href="#ms-pathway">MS Pathway</a></li>
+                <li><a href="#roi">Investment</a></li>
+                <li><a href="#next-steps">Next Steps</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="hero">
+        <div class="hero-grid"></div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">Strategic Blueprint 2025&ndash;2030</div>
+                <h1>
+                    <span class="teal">Learn AI. Build with AI. Lead with AI.</span><br>
+                    Three FinTech Certificates. One MS Pathway.
+                </h1>
+                <p class="hero-tagline">
+                    Three progressive certificates that take financial professionals from AI
+                    literacy to hands-on operations to strategic leadership &mdash; each a stepping
+                    stone toward NYIT's MS in FinTech &amp; Financial Data Analytics.
+                </p>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <div class="number">~100K</div>
+                        <div class="label">NYC Finance AI-Impacted Jobs</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="number">25&ndash;47%</div>
+                        <div class="label">AI Salary Premium</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="number">3</div>
+                        <div class="label">Certificates</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="number">$1,499</div>
+                        <div class="label">Per Certificate</div>
+                    </div>
+                </div>
+                <a href="#certificates" class="hero-cta">
+                    Explore the 3 Certificates <span>&rarr;</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <div class="thesis-banner">
+        <div class="container">
+            <div class="thesis-content">
+                <p class="thesis-quote">
+                    &ldquo;Finance doesn't need more dashboards. <span class="highlight">It needs agents you can trust.</span>&rdquo;
+                </p>
+                <p class="thesis-sub">
+                    The market is shifting from AI copilots to autonomous agentic workflows.
+                    NYIT's polytechnic identity makes it uniquely positioned to teach professionals
+                    how to build, govern, and deploy AI agents in regulated financial environments.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== THE OPPORTUNITY ===== -->
+    <section class="section" id="opportunity">
+        <div class="container">
+            <div class="fade-up">
+                <span class="section-label">Section 1 &mdash; The Opportunity</span>
+                <h2 class="section-title">The NYC FinTech Labor Market</h2>
+                <p class="section-subtitle">
+                    The New York metro area is the densest U.S. market for finance and technology roles.
+                    Four primary job clusters &mdash; representing roughly 100,000 positions &mdash; face
+                    the same AI transformation. Formal training has not kept pace.
+                </p>
+                <div class="divider"></div>
+            </div>
+
+            <div class="logic-flow fade-up">
+                <div class="logic-step">
+                    <div class="step-num">Step 1</div>
+                    <h4>~100,000 Jobs</h4>
+                    <p>Four finance job clusters in NYC</p>
+                </div>
+                <span class="logic-arrow">&rarr;</span>
+                <div class="logic-step">
+                    <div class="step-num">Step 2</div>
+                    <h4>One Universal Gap</h4>
+                    <p>Every role needs AI skills &mdash; nobody is teaching them</p>
+                </div>
+                <span class="logic-arrow">&rarr;</span>
+                <div class="logic-step">
+                    <div class="step-num">Step 3</div>
+                    <h4>3 Certificates</h4>
+                    <p>Learn it. Build with it. Lead with it.</p>
+                </div>
+            </div>
+
+            <h3 class="fade-up" style="margin-top: 40px; color: var(--nyit-navy);">The Four Job Clusters</h3>
+            <p class="fade-up" style="color: var(--text-secondary); margin-bottom: 20px;">
+                BLS-defined occupational categories that constitute the NYC financial workforce most impacted by AI.
+            </p>
+
+            <div class="grid-2 fade-up">
+                <div class="cluster-card">
+                    <h4>Financial Data Analysts</h4>
+                    <p class="cluster-subtitle">The analytical core</p>
+                    <div class="cluster-stat-row">
+                        <span class="stat-label">NYC Employment</span>
+                        <span class="stat-value">~51,950</span>
+                    </div>
+                    <div class="cluster-stat-row">
+                        <span class="stat-label">Salary Range</span>
+                        <span class="stat-value">$127,000&ndash;$146,000</span>
+                    </div>
+                    <div class="cluster-stat-row">
+                        <span class="stat-label">AI Impact</span>
+                        <span class="stat-value">35&ndash;45% of tasks transforming</span>
+                    </div>
+                </div>
+                <div class="cluster-card">
+                    <h4>Compliance &amp; RegTech</h4>
+                    <p class="cluster-subtitle">The regulatory shield</p>
+                    <div class="cluster-stat-row">
+                        <span class="stat-label">NYC Employment</span>
+                        <span class="stat-value">~21,230</span>
+                    </div>
+                    <div class="cluster-stat-row">
+                        <span class="stat-label">Salary Range</span>
+                        <span class="stat-value">$90,000&ndash;$172,000</span>
+                    </div>
+                    <div class="cluster-stat-row">
+                        <span class="stat-label">AI Impact</span>
+                        <span class="stat-value">30&ndash;45% of tasks transforming</span>
+                    </div>
+                </div>
+                <div class="cluster-card">
+                    <h4>AI/ML in Finance</h4>
+                    <p class="cluster-subtitle">The growth frontier</p>
+                    <div class="cluster-stat-row">
+                        <span class="stat-label">NYC Employment</span>
+                        <span class="stat-value">~16,330</span>
+                    </div>
+                    <div class="cluster-stat-row">
+                        <span class="stat-label">Salary Range</span>
+                        <span class="stat-value">$134,000&ndash;$210,000</span>
+                    </div>
+                    <div class="cluster-stat-row">
+                        <span class="stat-label">AI Impact</span>
+                        <span class="stat-value">34% BLS growth &mdash; accelerating</span>
+                    </div>
+                </div>
+                <div class="cluster-card">
+                    <h4>Risk Analysts</h4>
+                    <p class="cluster-subtitle">The risk engine</p>
+                    <div class="cluster-stat-row">
+                        <span class="stat-label">NYC Employment</span>
+                        <span class="stat-value">~11,440</span>
+                    </div>
+                    <div class="cluster-stat-row">
+                        <span class="stat-label">Salary Range</span>
+                        <span class="stat-value">$141,000&ndash;$161,000</span>
+                    </div>
+                    <div class="cluster-stat-row">
+                        <span class="stat-label">AI Impact</span>
+                        <span class="stat-value">25&ndash;40% of tasks transforming</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bar-chart fade-up" style="margin-top: 40px;">
+                <h3 class="bar-chart-title">NYC Finance &amp; Tech Employment (~100,000 AI-impacted roles)</h3>
+                <div class="bar-row">
+                    <span class="bar-label">Financial Analysts</span>
+                    <div class="bar-track"><div class="bar-fill navy" style="--target-width: 95%;">~51,950</div></div>
+                </div>
+                <div class="bar-row">
+                    <span class="bar-label">Compliance &amp; RegTech</span>
+                    <div class="bar-track"><div class="bar-fill teal" style="--target-width: 39%;">~21,230</div></div>
+                </div>
+                <div class="bar-row">
+                    <span class="bar-label">AI/ML in Finance</span>
+                    <div class="bar-track"><div class="bar-fill teal-dark" style="--target-width: 30%;">~16,330</div></div>
+                </div>
+                <div class="bar-row">
+                    <span class="bar-label">Risk Analysts</span>
+                    <div class="bar-track"><div class="bar-fill navy" style="--target-width: 21%;">~11,440</div></div>
+                </div>
+            </div>
+            <p class="fade-up" style="font-size: 0.78rem; color: var(--text-muted); margin-top: 8px;">
+                Sources: BLS OEWS (May 2023), LinkedIn, Glassdoor, Built In NYC. NYC&ndash;Newark&ndash;Jersey City MSA.
+            </p>
+        </div>
+    </section>
+
+    <!-- ===== THE GAP ===== -->
+    <section class="section section-alt" id="gap">
+        <div class="container">
+            <div class="fade-up">
+                <span class="section-label">Section 2 &mdash; The Gap</span>
+                <h2 class="section-title">Three Waves of AI Disruption in Finance</h2>
+                <p class="section-subtitle">
+                    AI in financial services is not a single event. It is three overlapping waves,
+                    each demanding different skills and creating different opportunities.
+                </p>
+                <div class="divider"></div>
+            </div>
+
+            <div class="wave-cards fade-up">
+                <div class="wave-card wave-1">
+                    <h4>Wave 1: Copilots Everywhere (2024&ndash;2025)</h4>
+                    <p>JPMorgan onboarded <strong>200,000 users</strong> in 8 months. Goldman Sachs rolled out
+                        its GS AI Assistant to <strong>10,000+ employees</strong>. Drafting, summarizing, and
+                        data analysis are the first tasks transformed.</p>
+                </div>
+                <div class="wave-card wave-2">
+                    <h4>Wave 2: Agentic Automation (2025&ndash;2027)</h4>
+                    <p>Deloitte forecasts <strong>25%</strong> of enterprises will deploy AI agents by 2025,
+                        rising to <strong>50% by 2027</strong>. Klarna replaced the work of <strong>700 FTEs</strong>
+                        with agentic customer service. Multi-step automation replaces simple drafting.</p>
+                </div>
+                <div class="wave-card wave-3">
+                    <h4>Wave 3: System-Level Effects (2028&ndash;2030)</h4>
+                    <p>Goldman Sachs estimates a <strong>$780B</strong> total addressable market for AI in
+                        financial services. Regulators flag correlated model behavior. Governance roles
+                        expand even as routine tasks shrink.</p>
+                </div>
+            </div>
+
+            <div class="gap-universal fade-up">
+                <h3>The Insight: One Gap, Not Four</h3>
+                <p>
+                    A Financial Analyst, a Compliance Officer, and a Risk Manager face
+                    <span class="highlight">the same AI skill gap</span>. They all need to understand how AI works,
+                    all need to build AI-powered workflows, and all need governance frameworks for regulated environments.
+                    The <span class="highlight">domain knowledge they already have</span> &mdash; credit analysis,
+                    regulatory compliance, portfolio management &mdash; is their career. What they're missing is the AI layer.
+                </p>
+                <p style="margin-top: 16px; margin-bottom: 0;">
+                    This is why the certificates are organized by <span class="highlight">AI skill progression</span>,
+                    not by financial role. You already know finance. We teach you the AI.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== THE 3 CERTIFICATES ===== -->
+    <section class="section" id="certificates">
+        <div class="container">
+            <div class="fade-up text-center">
+                <span class="section-label">Section 3 &mdash; The Solution</span>
+                <h2 class="section-title">Three Progressive Certificates</h2>
+                <p class="section-subtitle mx-auto">
+                    Organized by AI skill progression, not by financial role. Every finance professional &mdash;
+                    analyst, compliance officer, risk manager, or payments specialist &mdash; follows the same path.
+                </p>
+                <div class="divider center"></div>
+                <div style="display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; margin-top: 8px; margin-bottom: 40px; font-size: 0.85rem; color: var(--text-muted);">
+                    <span>&#127891; NYIT Agentic FinTech Series</span>
+                    <span>&#128187; Online, Hybrid Support</span>
+                    <span>&#128736; Project-Based</span>
+                    <span>&#128176; $1,499 per certificate</span>
+                </div>
+            </div>
+
+            <!-- ── Certificate 1 ── -->
+            <div class="cert-card cert-1 fade-up" style="margin-bottom: 28px;">
+                <div class="cert-header">
+                    <div class="cert-number">1</div>
+                    <h3>AI Foundations for Financial Professionals</h3>
+                    <p class="cert-subtitle">Understand the technology, the regulations, and the opportunity.</p>
+                    <div class="cert-meta">
+                        <span>&#128197; 5 Weeks</span>
+                        <span>&#127919; All finance roles</span>
+                        <span>&#128218; No prerequisites</span>
+                    </div>
+                </div>
+                <div class="cert-body">
+                    <div class="cert-who">
+                        <strong>Who is this for?</strong> Any financial professional who wants a solid,
+                        practical understanding of AI before applying it in a regulated environment.
+                        No programming background required.
+                    </div>
+                    <button class="cert-module-toggle" onclick="toggleModules(this)">View Weekly Curriculum <span class="toggle-arrow">&#9660;</span></button>
+                    <div class="cert-module-list">
+                        <div class="module-item">
+                            <h5>Week 1: How AI Works for Finance</h5>
+                            <p>A practical overview of LLMs, tokens, context windows, and hallucination &mdash; with financial examples.</p>
+                            <ul class="module-objectives">
+                                <li>Explain how large language models generate text and where they fail</li>
+                                <li>Identify hallucination risks specific to financial data and analysis</li>
+                                <li>Distinguish between AI hype and practical capability in finance</li>
+                            </ul>
+                            <div style="margin-top: 8px;"><span class="tool-tag">ChatGPT</span><span class="tool-tag">Claude</span></div>
+                        </div>
+                        <div class="module-item">
+                            <h5>Week 2: Regulatory Environment &amp; Responsible AI</h5>
+                            <p>AI governance in regulated industries: SR 11-7, BSA/AML, KYC, model risk management, and data privacy.</p>
+                            <ul class="module-objectives">
+                                <li>Apply SR 11-7 model risk management principles to AI systems</li>
+                                <li>Identify AI-specific risks under BSA/AML and KYC frameworks</li>
+                                <li>Evaluate data privacy requirements for AI in financial services</li>
+                            </ul>
+                            <div style="margin-top: 8px;"><span class="tool-tag">NIST AI RMF</span><span class="tool-tag">ISO 42001</span><span class="tool-tag">Case Studies</span></div>
+                        </div>
+                        <div class="module-item">
+                            <h5>Week 3: Prompt Engineering for Financial Documents</h5>
+                            <p>Structured prompting for SEC filings, credit memos, earnings calls, and regulatory documents.</p>
+                            <ul class="module-objectives">
+                                <li>Extract structured data from 10-K/10-Q filings using prompt chains</li>
+                                <li>Build reusable prompt templates for recurring financial analysis</li>
+                                <li>Generate structured outputs (tables, JSON) from unstructured financial text</li>
+                            </ul>
+                            <div style="margin-top: 8px;"><span class="tool-tag">Claude</span><span class="tool-tag">ChatGPT</span><span class="tool-tag">EDGAR API</span></div>
+                        </div>
+                        <div class="module-item">
+                            <h5>Week 4: Agent Architecture in Finance</h5>
+                            <p>Copilots vs. agents: when AI should assist vs. act autonomously. Guardrails for regulated environments.</p>
+                            <ul class="module-objectives">
+                                <li>Distinguish between copilot-style AI and autonomous agents</li>
+                                <li>Map financial tasks along the automation spectrum</li>
+                                <li>Design simple agent workflows with human-in-the-loop approval gates</li>
+                            </ul>
+                            <div style="margin-top: 8px;"><span class="tool-tag">Zapier (intro)</span><span class="tool-tag">Make (intro)</span><span class="tool-tag">Python (intro)</span></div>
+                        </div>
+                        <div class="module-item">
+                            <h5>Week 5: Your AI Finance Toolkit &amp; Capstone</h5>
+                            <p>Hands-on setup of a personal AI toolkit for finance. Apply everything to a real financial scenario.</p>
+                            <ul class="module-objectives">
+                                <li>Configure AI tools for financial document analysis</li>
+                                <li>Connect to financial data APIs (EDGAR, market data)</li>
+                                <li>Deliver an AI readiness assessment for a financial organization</li>
+                            </ul>
+                            <div style="margin-top: 8px;"><span class="tool-tag">Claude</span><span class="tool-tag">Python</span><span class="tool-tag">EDGAR API</span><span class="tool-tag">JSON/CSV</span></div>
+                        </div>
+                    </div>
+                    <div class="cert-capstone">
+                        <div class="capstone-label">Capstone Project</div>
+                        <h5>&ldquo;The AI Readiness Assessment&rdquo;</h5>
+                        <p>Assess a financial organization's operations for AI opportunities and regulatory risks.
+                            Deliver a prioritized recommendation report with governance considerations.</p>
+                    </div>
+                    <div class="cert-ms">
+                        <div class="ms-label">MS Pathway Connection</div>
+                        <div><span class="ms-course-tag">BUSA 660: AI &amp; Machine Learning</span><span class="ms-course-tag">QANT 605: Statistical Thinking</span></div>
+                        <p><strong>Certificate:</strong> Understand how AI works in finance. <strong>MS:</strong> Master the quantitative foundations and build production systems.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── Certificate 2 ── -->
+            <div class="cert-card cert-2 fade-up" style="margin-bottom: 28px;">
+                <div class="cert-header">
+                    <div class="cert-number">2</div>
+                    <h3>AI Financial Operations</h3>
+                    <p class="cert-subtitle">Build real AI-powered systems for regulated financial environments.</p>
+                    <div class="cert-meta">
+                        <span>&#128197; 8 Weeks</span>
+                        <span>&#127919; All finance roles</span>
+                        <span>&#128218; Certificate 1 or equivalent AI literacy</span>
+                    </div>
+                </div>
+                <div class="cert-body">
+                    <div class="cert-who">
+                        <strong>Who is this for?</strong> Financial professionals ready to build.
+                        You'll create analysis pipelines, compliance monitors, risk models, and
+                        AI-powered workflows &mdash; choosing capstone projects in your own domain.
+                    </div>
+                    <button class="cert-module-toggle" onclick="toggleModules(this)">View Weekly Curriculum <span class="toggle-arrow">&#9660;</span></button>
+                    <div class="cert-module-list">
+                        <div class="module-item">
+                            <h5>Week 1: Financial Document Analysis &amp; Intelligence</h5>
+                            <p>Extract structured data from SEC filings using LLMs. Build automated filing retrieval and analysis pipelines.</p>
+                            <ul class="module-objectives">
+                                <li>Extract key financial metrics from 10-K/10-Q filings using prompt chains</li>
+                                <li>Build an automated EDGAR filing retrieval pipeline</li>
+                                <li>Create a financial monitoring dashboard with automated alerts</li>
+                            </ul>
+                            <div style="margin-top: 8px;"><span class="tool-tag">Claude</span><span class="tool-tag">EDGAR API</span><span class="tool-tag">Python/Pandas</span><span class="tool-tag">Power BI</span></div>
+                            <div class="module-deliverable"><strong>Deliverable:</strong> Automated 10-K extraction pipeline with financial intelligence dashboard</div>
+                        </div>
+                        <div class="module-item">
+                            <h5>Week 2: AI-Augmented Credit Analysis &amp; Risk Modeling</h5>
+                            <p>Use LLMs to accelerate credit memo drafting and covenant tracking. Build foundational risk models.</p>
+                            <ul class="module-objectives">
+                                <li>Generate AI-assisted credit memos from borrower financial packages</li>
+                                <li>Build NLP-based covenant extraction and tracking workflows</li>
+                                <li>Apply credit scoring concepts (PD/LGD fundamentals)</li>
+                            </ul>
+                            <div style="margin-top: 8px;"><span class="tool-tag">Claude</span><span class="tool-tag">Python (scikit-learn)</span><span class="tool-tag">Excel</span><span class="tool-tag">SHAP</span></div>
+                            <div class="module-deliverable"><strong>Deliverable:</strong> AI-generated credit memo with covenant tracker and risk model prototype</div>
+                        </div>
+                        <div class="module-item">
+                            <h5>Week 3: Compliance Monitoring &amp; AML Detection</h5>
+                            <p>Use NLP to track regulatory changes. Automate suspicious activity detection and SAR drafting.</p>
+                            <ul class="module-objectives">
+                                <li>Build an automated regulatory change detection pipeline</li>
+                                <li>Design AI-powered transaction monitoring with tunable thresholds</li>
+                                <li>Draft Suspicious Activity Reports using LLM-assisted workflows</li>
+                            </ul>
+                            <div style="margin-top: 8px;"><span class="tool-tag">Python (NLP)</span><span class="tool-tag">Claude</span><span class="tool-tag">RegTech Platforms</span><span class="tool-tag">Neo4j (intro)</span></div>
+                            <div class="module-deliverable"><strong>Deliverable:</strong> Compliance monitoring prototype with regulatory change alerts</div>
+                        </div>
+                        <div class="module-item">
+                            <h5>Week 4: Payment Operations &amp; Fraud Detection</h5>
+                            <p>Automate exception handling and fraud detection in payment flows. Integrate with sandbox APIs.</p>
+                            <ul class="module-objectives">
+                                <li>Design agent-based exception handling for payment failures</li>
+                                <li>Build a fraud detection pipeline with rule-based and ML scoring</li>
+                                <li>Integrate with Plaid and Stripe sandbox APIs</li>
+                            </ul>
+                            <div style="margin-top: 8px;"><span class="tool-tag">Plaid API</span><span class="tool-tag">Stripe API</span><span class="tool-tag">Python</span><span class="tool-tag">Make</span></div>
+                            <div class="module-deliverable"><strong>Deliverable:</strong> Payment exception-handling prototype with fraud scoring</div>
+                        </div>
+                        <div class="module-item">
+                            <h5>Week 5: Portfolio Analytics &amp; Scenario Modeling</h5>
+                            <p>Sentiment analysis on earnings calls and news. AI-driven stress testing and scenario analysis.</p>
+                            <ul class="module-objectives">
+                                <li>Run sentiment analysis on earnings call transcripts</li>
+                                <li>Build AI-assisted stress-test scenarios for portfolio exposure</li>
+                                <li>Validate AI-generated forecasts against historical performance</li>
+                            </ul>
+                            <div style="margin-top: 8px;"><span class="tool-tag">Python (NLP)</span><span class="tool-tag">Claude</span><span class="tool-tag">Excel</span><span class="tool-tag">Jupyter</span></div>
+                            <div class="module-deliverable"><strong>Deliverable:</strong> Scenario analysis report with AI-generated forecasts</div>
+                        </div>
+                        <div class="module-item">
+                            <h5>Week 6: Digital Assets &amp; Tokenized Finance</h5>
+                            <p>Blockchain fundamentals, stablecoin mechanics, on-chain analytics, and tokenized settlement infrastructure.</p>
+                            <ul class="module-objectives">
+                                <li>Analyze stablecoin architectures and CBDC design considerations</li>
+                                <li>Use on-chain analytics tools to trace transaction flows</li>
+                                <li>Evaluate tokenized settlement rails and their regulatory implications</li>
+                            </ul>
+                            <div style="margin-top: 8px;"><span class="tool-tag">Etherscan</span><span class="tool-tag">Dune Analytics</span><span class="tool-tag">MetaMask (testnet)</span></div>
+                            <div class="module-deliverable"><strong>Deliverable:</strong> On-chain analytics report with regulatory risk assessment</div>
+                        </div>
+                        <div class="module-item">
+                            <h5>Week 7: Data Governance &amp; Audit Trails</h5>
+                            <p>Build audit-ready data pipelines. Design controls for AI systems in regulated environments.</p>
+                            <ul class="module-objectives">
+                                <li>Design automated data validation and lineage documentation</li>
+                                <li>Implement data quality scoring for financial databases</li>
+                                <li>Create governance protocols that survive regulatory examination</li>
+                            </ul>
+                            <div style="margin-top: 8px;"><span class="tool-tag">Python</span><span class="tool-tag">Excel</span><span class="tool-tag">Airtable</span><span class="tool-tag">Document Templates</span></div>
+                            <div class="module-deliverable"><strong>Deliverable:</strong> Data governance framework with audit trail documentation</div>
+                        </div>
+                        <div class="module-item">
+                            <h5>Week 8: Capstone Sprint</h5>
+                            <p>Build and present your domain-specific capstone project to a panel of instructors and peers.</p>
+                            <ul class="module-objectives">
+                                <li>Select and scope a capstone aligned with your career focus</li>
+                                <li>Build a working AI-powered financial system or workflow</li>
+                                <li>Present findings and demo to a peer panel</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="cert-capstone">
+                        <div class="capstone-label">Capstone &mdash; Choose Your Domain</div>
+                        <h5>Students choose a project that matches their career focus:</h5>
+                        <div class="project-options">
+                            <div class="project-option">
+                                <strong>Analyst Focus</strong>
+                                &ldquo;The AI-Augmented Analyst&rdquo; &mdash; End-to-end financial intelligence system with automated ingestion and executive dashboard
+                            </div>
+                            <div class="project-option">
+                                <strong>Compliance Focus</strong>
+                                &ldquo;The AI-Ready Compliance Program&rdquo; &mdash; Complete governance framework with monitoring and audit documentation
+                            </div>
+                            <div class="project-option">
+                                <strong>Risk Focus</strong>
+                                &ldquo;The AI-Governed Risk Engine&rdquo; &mdash; Credit risk monitoring with early-warning signals and model risk controls
+                            </div>
+                            <div class="project-option">
+                                <strong>Payments Focus</strong>
+                                &ldquo;The AI-Powered Financial Product&rdquo; &mdash; Working prototype with compliance review and investor pitch deck
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cert-ms">
+                        <div class="ms-label">MS Pathway Connection</div>
+                        <div>
+                            <span class="ms-course-tag">FINC 671: Digital Finance</span>
+                            <span class="ms-course-tag">FINC 771: AI Risk &amp; Credit</span>
+                            <span class="ms-course-tag">FINC 772: Compliance &amp; Governance</span>
+                        </div>
+                        <p><strong>Certificate:</strong> Build AI-powered financial systems. <strong>MS:</strong> Master the quantitative theory, regulatory architecture, and enterprise deployment behind them.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── Certificate 3 ── -->
+            <div class="cert-card cert-3 fade-up" style="margin-bottom: 28px;">
+                <div class="cert-header">
+                    <div class="cert-number">3</div>
+                    <h3>AI Financial Strategy &amp; Leadership</h3>
+                    <p class="cert-subtitle">Govern AI systems. Build business cases. Lead the transformation.</p>
+                    <div class="cert-meta">
+                        <span>&#128197; 6 Weeks</span>
+                        <span>&#127919; VPs, Directors, Senior Managers</span>
+                        <span>&#128218; Certificate 1 or equivalent + 3 years finance experience</span>
+                    </div>
+                </div>
+                <div class="cert-body">
+                    <div class="cert-who">
+                        <strong>Who is this for?</strong> Financial leaders responsible for AI adoption,
+                        model risk governance, and team transformation in regulated environments.
+                        Ideal after Certificate 2, but also works standalone for senior professionals.
+                    </div>
+                    <button class="cert-module-toggle" onclick="toggleModules(this)">View Weekly Curriculum <span class="toggle-arrow">&#9660;</span></button>
+                    <div class="cert-module-list">
+                        <div class="module-item">
+                            <h5>Week 1: AI ROI &amp; Business Cases for Financial Services</h5>
+                            <p>Build financial justifications for AI adoption. Navigate buy vs. build decisions in regulated environments.</p>
+                            <ul class="module-objectives">
+                                <li>Build a financial business case for AI adoption</li>
+                                <li>Calculate ROI using time-saved and value-added frameworks</li>
+                                <li>Evaluate build vs. buy decisions with regulatory constraints</li>
+                            </ul>
+                            <div style="margin-top: 8px;"><span class="tool-tag">Excel</span><span class="tool-tag">ChatGPT</span><span class="tool-tag">Gartner Frameworks</span></div>
+                            <div class="module-deliverable"><strong>Deliverable:</strong> AI investment business case with ROI projections</div>
+                        </div>
+                        <div class="module-item">
+                            <h5>Week 2: Model Risk &amp; AI Governance Frameworks</h5>
+                            <p>Build organizational infrastructure for safe AI deployment. SR 11-7, NIST AI RMF, ISO 42001.</p>
+                            <ul class="module-objectives">
+                                <li>Design an AI use-case inventory and risk-tiering framework</li>
+                                <li>Apply SR 11-7 model risk management to AI systems</li>
+                                <li>Draft model governance documentation for regulatory exam</li>
+                            </ul>
+                            <div style="margin-top: 8px;"><span class="tool-tag">NIST AI RMF</span><span class="tool-tag">ISO 42001</span><span class="tool-tag">Policy Templates</span></div>
+                            <div class="module-deliverable"><strong>Deliverable:</strong> AI governance policy with use-case inventory and vendor assessment</div>
+                        </div>
+                        <div class="module-item">
+                            <h5>Week 3: Change Management &amp; AI Team Building</h5>
+                            <p>Lead the cultural shift. Build the case for new roles. Manage workforce transition in financial institutions.</p>
+                            <ul class="module-objectives">
+                                <li>Design an AI adoption change management plan</li>
+                                <li>Define new AI-enhanced roles and skill requirements</li>
+                                <li>Build team assessment and training roadmaps</li>
+                            </ul>
+                            <div style="margin-top: 8px;"><span class="tool-tag">Miro</span><span class="tool-tag">HR Frameworks</span><span class="tool-tag">Survey Tools</span></div>
+                            <div class="module-deliverable"><strong>Deliverable:</strong> Change management plan with role definitions and training roadmap</div>
+                        </div>
+                        <div class="module-item">
+                            <h5>Week 4: Vendor Risk &amp; Third-Party AI Management</h5>
+                            <p>Evaluate AI vendor platforms. Manage concentration risk and common-provider dependency.</p>
+                            <ul class="module-objectives">
+                                <li>Evaluate third-party AI vendor risk (concentration, audit rights)</li>
+                                <li>Design operational resilience plans for AI-dependent processes</li>
+                                <li>Build vendor scoring frameworks for regulated environments</li>
+                            </ul>
+                            <div style="margin-top: 8px;"><span class="tool-tag">Vendor Eval Templates</span><span class="tool-tag">Risk Matrices</span><span class="tool-tag">Claude</span></div>
+                            <div class="module-deliverable"><strong>Deliverable:</strong> Vendor evaluation framework with concentration risk assessment</div>
+                        </div>
+                        <div class="module-item">
+                            <h5>Week 5: Enterprise AI Strategy &amp; Deployment</h5>
+                            <p>MLOps pipelines, audit trails, data lineage, and production readiness for regulated AI systems.</p>
+                            <ul class="module-objectives">
+                                <li>Design MLOps pipelines for financial services (versioning, monitoring, rollback)</li>
+                                <li>Build audit trails and data lineage documentation</li>
+                                <li>Draft an enterprise AI strategy document with governance roadmap</li>
+                            </ul>
+                            <div style="margin-top: 8px;"><span class="tool-tag">MLflow (intro)</span><span class="tool-tag">Docker (intro)</span><span class="tool-tag">Claude</span></div>
+                            <div class="module-deliverable"><strong>Deliverable:</strong> Enterprise AI strategy with deployment checklist</div>
+                        </div>
+                        <div class="module-item">
+                            <h5>Week 6: Capstone Sprint</h5>
+                            <p>Build and present a board-ready AI transformation strategy for a financial institution.</p>
+                            <ul class="module-objectives">
+                                <li>Synthesize strategic frameworks into a cohesive roadmap</li>
+                                <li>Present to a simulated board with Q&amp;A defense</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="cert-capstone">
+                        <div class="capstone-label">Capstone Project</div>
+                        <h5>&ldquo;The Agentic Finance Roadmap&rdquo;</h5>
+                        <p>A board-ready AI transformation strategy for a financial institution: 3-year roadmap,
+                            governance framework, model risk controls, vendor strategy, team restructuring plan,
+                            and budget model &mdash; presented for Q&amp;A defense.</p>
+                    </div>
+                    <div class="cert-ms">
+                        <div class="ms-label">MS Pathway Connection</div>
+                        <div>
+                            <span class="ms-course-tag">FINC 773: Enterprise AI</span>
+                            <span class="ms-course-tag">FINC 672: FinTech Essentials</span>
+                            <span class="ms-course-tag">Capstone: Industry Practicum</span>
+                        </div>
+                        <p><strong>Certificate:</strong> Build AI governance and strategy for financial services. <strong>MS:</strong> Master advanced AI architectures, MLOps, and enterprise deployment.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== WHY NYIT ===== -->
+    <section class="section section-alt" id="competitive">
+        <div class="container">
+            <div class="fade-up">
+                <span class="section-label">Section 4</span>
+                <h2 class="section-title">Why NYIT?</h2>
+                <p class="section-subtitle">
+                    No dominant NYC player combines affordable pricing, hands-on AI building,
+                    and financial governance depth. NYIT fills that gap.
+                </p>
+                <div class="divider"></div>
+            </div>
+            <div class="competitor-grid fade-up">
+                <div class="competitor-card">
+                    <h4>NYU SPS</h4>
+                    <div class="comp-type">University Certificate</div>
+                    <p>Broad FinTech overview, but not deep on AI agent architecture or hands-on building.</p>
+                    <div class="comp-price">$5,760</div>
+                </div>
+                <div class="competitor-card">
+                    <h4>Columbia Boot Camp</h4>
+                    <div class="comp-type">Intensive Bootcamp</div>
+                    <p>Geared toward career switchers, not mid-career governance. Premium pricing.</p>
+                    <div class="comp-price">$13,495&ndash;$14,745</div>
+                </div>
+                <div class="competitor-card">
+                    <h4>Stevens Institute</h4>
+                    <div class="comp-type">Graduate Certificate</div>
+                    <p>Heavy theory, lighter on applied AI. Premium pricing beyond employer reimbursement range.</p>
+                    <div class="comp-price">~$23,160</div>
+                </div>
+                <div class="competitor-card">
+                    <h4>Baruch / CUNY</h4>
+                    <div class="comp-type">Public University</div>
+                    <p>Accessible pricing, but limited AI integration and no agentic curriculum.</p>
+                    <div class="comp-price">~$3,900</div>
+                </div>
+            </div>
+            <div class="nyit-position fade-up">
+                <h3>The NYIT Advantage: Builder + Governor</h3>
+                <p>
+                    As an institute of technology, NYIT offers the rare combination of <strong>hands-on building</strong>
+                    and <strong>governance depth</strong>. Affordable enough for employer reimbursement, rigorous enough
+                    for regulated environments, and practical enough that graduates ship working AI systems.
+                </p>
+                <div class="position-hooks">
+                    <div class="hook-item"><span class="hook-label">Price Advantage</span>3 certs/year within IRS Section 127 ($5,250 cap)</div>
+                    <div class="hook-item"><span class="hook-label">Builder DNA</span>Polytechnic heritage = engineering-adjacent credibility</div>
+                    <div class="hook-item"><span class="hook-label">Governance Depth</span>Every certificate includes AI risk, controls, and audit trails</div>
+                    <div class="hook-item"><span class="hook-label">MS Pathway</span>Certificates feed directly into the MS in FinTech</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== MS PATHWAY ===== -->
+    <section class="section" id="ms-pathway">
+        <div class="container">
+            <div class="fade-up text-center">
+                <span class="section-label">Section 5 &mdash; Pathway to Graduate Study</span>
+                <h2 class="section-title">Your Path to an MS in FinTech &amp; Financial Data Analytics</h2>
+                <p class="section-subtitle mx-auto">
+                    Certificates deliver immediate professional value on their own.
+                    For those who choose to continue, each earns a scholarship toward NYIT's MS (30 credits).
+                </p>
+                <div class="divider center"></div>
+            </div>
+            <div class="fade-up" style="background: linear-gradient(135deg, var(--nyit-navy), var(--nyit-navy-dark)); border-radius: var(--radius-md); padding: 28px 32px; text-align: center;">
+                <p style="color: #fff; font-size: 1.15rem; font-weight: 700; margin-bottom: 6px;">Certificates are valuable on their own. The MS is optional.</p>
+                <p style="color: rgba(255,255,255,0.7); font-size: 0.95rem; margin-bottom: 0;">Enroll in the MS at any time &mdash; no rigid timeline or required sequence.</p>
+            </div>
+            <div class="grid-2 fade-up" style="margin-top: 28px;">
+                <div class="card" style="border-left: 4px solid var(--nyit-teal);">
+                    <h4 style="color: var(--nyit-teal); margin-bottom: 8px;">Certificates: Applied Practitioner</h4>
+                    <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 0;">Hands-on, project-based skills. Build AI systems, ship capstone projects, work with real financial data. Designed for working professionals.</p>
+                </div>
+                <div class="card" style="border-left: 4px solid var(--nyit-navy);">
+                    <h4 style="color: var(--nyit-navy); margin-bottom: 8px;">MS Degree: Analytical &amp; Architectural</h4>
+                    <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 0;">Deeper theory, quantitative methods, research design. Builds on certificate foundations with 30 credits of graduate coursework.</p>
+                </div>
+            </div>
+            <div class="fade-up" style="margin-top: 32px;">
+                <h3 style="color: var(--nyit-navy); margin-bottom: 16px;">How Each Certificate Feeds the MS</h3>
+                <table class="pathway-table">
+                    <thead><tr><th style="width: 28%;">Certificate</th><th style="width: 32%;">MS Courses It Prepares You For</th><th style="width: 40%;">How They Complement Each Other</th></tr></thead>
+                    <tbody>
+                        <tr><td><strong>Cert 1:</strong> AI Foundations</td><td>BUSA 660: AI &amp; ML; QANT 605: Statistical Thinking</td><td>Certificate: Understand AI in finance. MS: Quantitative foundations and advanced methods.</td></tr>
+                        <tr><td><strong>Cert 2:</strong> AI Operations</td><td>FINC 671; FINC 771; FINC 772</td><td>Certificate: Build financial AI systems. MS: Master theory, regulatory architecture, and enterprise data governance.</td></tr>
+                        <tr><td><strong>Cert 3:</strong> Strategy &amp; Leadership</td><td>FINC 773; FINC 672; Capstone</td><td>Certificate: Lead AI adoption. MS: Advanced AI architectures and enterprise deployment strategy.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="fade-up" style="margin-top: 32px;">
+                <h3 style="color: var(--nyit-navy); margin-bottom: 16px;">Scholarship Model</h3>
+                <div class="card" style="border: 2px solid var(--nyit-teal); text-align: center; padding: 28px;">
+                    <p style="font-size: 1.1rem; color: var(--nyit-navy); margin-bottom: 8px;"><strong>Each certificate = $500 tuition scholarship</strong> toward the MS</p>
+                    <p style="font-size: 1.3rem; font-weight: 800; color: var(--nyit-teal); margin-bottom: 8px;">Complete all 3 = $1,500 scholarship toward MS tuition</p>
+                    <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 0;">All 3 certificates ($4,497) completable in one year within the IRS Section 127 tax-free cap ($5,250).</p>
+                </div>
+            </div>
+            <div class="fade-up" style="margin-top: 32px;">
+                <h3 style="color: var(--nyit-navy); margin-bottom: 16px;">MS Program Curriculum (30 Credits)</h3>
+                <div class="grid-3">
+                    <div class="card" style="border-top: 4px solid var(--nyit-teal);">
+                        <h4 style="color: var(--nyit-navy); margin-bottom: 12px;">Foundational Core (12 cr)</h4>
+                        <div style="font-size: 0.85rem; color: var(--text-secondary);">
+                            <p style="margin-bottom: 4px;">BUSA 660: AI &amp; Machine Learning</p>
+                            <p style="margin-bottom: 4px;">QANT 605: Statistical Thinking</p>
+                            <p style="margin-bottom: 4px;">FINC 671: Digital Finance</p>
+                            <p style="margin-bottom: 0;">FINC 672: FinTech Essentials</p>
+                        </div>
+                    </div>
+                    <div class="card" style="border-top: 4px solid var(--nyit-navy);">
+                        <h4 style="color: var(--nyit-navy); margin-bottom: 12px;">FinTech Essentials (9 cr)</h4>
+                        <div style="font-size: 0.85rem; color: var(--text-secondary);">
+                            <p style="margin-bottom: 4px;">FINC 771: AI Risk &amp; Credit</p>
+                            <p style="margin-bottom: 4px;">FINC 772: Compliance &amp; Governance</p>
+                            <p style="margin-bottom: 0;">FINC 773: Enterprise AI</p>
+                        </div>
+                    </div>
+                    <div class="card" style="border-top: 4px solid var(--nyit-teal-dark);">
+                        <h4 style="color: var(--nyit-navy); margin-bottom: 12px;">Advanced (9 cr)</h4>
+                        <div style="font-size: 0.85rem; color: var(--text-secondary);">
+                            <p style="margin-bottom: 4px;">Electives</p>
+                            <p style="margin-bottom: 4px;">Capstone</p>
+                            <p style="margin-bottom: 0;">Industry Practicum</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ROI & PRICING ===== -->
+    <section class="section section-alt" id="roi">
+        <div class="container">
+            <div class="fade-up">
+                <span class="section-label">Section 6</span>
+                <h2 class="section-title">ROI &amp; Investment Strategy</h2>
+                <p class="section-subtitle">
+                    AI-fluent FinTech roles command a 25&ndash;47% wage premium over traditional counterparts.
+                    All three certificates fit within one year of IRS Section 127 employer reimbursement.
+                </p>
+                <div class="divider"></div>
+            </div>
+            <h3 class="fade-up" style="color: var(--nyit-navy); margin-bottom: 24px;">AI Salary Premium in NYC Finance (2024&ndash;2025)</h3>
+            <div class="roi-chart fade-up">
+                <div class="roi-bar-group">
+                    <span class="roi-bar-label">Financial Analyst</span>
+                    <div class="roi-bars">
+                        <div class="roi-bar current" style="--target-width: 46%;">$110,000</div>
+                        <div class="roi-bar ai-enabled" style="--target-width: 61%;">$146,300 (+$36K)</div>
+                    </div>
+                </div>
+                <div class="roi-bar-group">
+                    <span class="roi-bar-label">Compliance Officer</span>
+                    <div class="roi-bars">
+                        <div class="roi-bar current" style="--target-width: 52%;">$124,000</div>
+                        <div class="roi-bar ai-enabled" style="--target-width: 76%;">$182,500 (+$59K)</div>
+                    </div>
+                </div>
+                <div class="roi-bar-group">
+                    <span class="roi-bar-label">Risk Manager</span>
+                    <div class="roi-bars">
+                        <div class="roi-bar current" style="--target-width: 59%;">$142,000</div>
+                        <div class="roi-bar ai-enabled" style="--target-width: 77%;">$185,500 (+$44K)</div>
+                    </div>
+                </div>
+                <div class="roi-bar-group">
+                    <span class="roi-bar-label">Product Manager (FinTech)</span>
+                    <div class="roi-bars">
+                        <div class="roi-bar current" style="--target-width: 66%;">$158,250</div>
+                        <div class="roi-bar ai-enabled" style="--target-width: 88%;">$211,300 (+$53K)</div>
+                    </div>
+                </div>
+            </div>
+            <p class="fade-up" style="font-size: 0.78rem; color: var(--text-muted); margin-top: 8px;">Sources: PwC AI Jobs Barometer, Robert Half 2025, Glassdoor, Indeed, IAPP AI Governance Salary Survey.</p>
+
+            <div class="pricing-section fade-up" style="margin-top: 48px;">
+                <div>
+                    <h3 style="color: var(--nyit-navy); margin-bottom: 16px;">Pricing Strategy</h3>
+                    <p style="color: var(--text-secondary);">
+                        All three certificates completable in one year: 3 &times; $1,499 = <strong>$4,497</strong>,
+                        fully covered under <strong>IRS Section 127</strong> ($5,250/year cap).
+                    </p>
+                    <div style="margin-top: 24px;">
+                        <h4 style="font-size: 0.9rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px;">Competitor Benchmark</h4>
+                        <div class="comp-price-row"><span class="comp-name">Stevens Institute</span><span class="comp-cost">~$23,160</span></div>
+                        <div class="comp-price-row"><span class="comp-name">Columbia Boot Camp</span><span class="comp-cost">$13,495&ndash;$14,745</span></div>
+                        <div class="comp-price-row"><span class="comp-name">NYU SPS</span><span class="comp-cost">$5,760</span></div>
+                        <div class="comp-price-row"><span class="comp-name">Baruch / CUNY</span><span class="comp-cost">~$3,900</span></div>
+                        <div class="comp-price-row nyit-row"><span class="comp-name">NYIT (Recommended)</span><span class="comp-cost">$1,499</span></div>
+                    </div>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 20px;">
+                    <div class="pricing-card">
+                        <div class="price">$1,499</div>
+                        <div class="price-unit">per certificate</div>
+                        <p class="price-rationale">3 &times; $1,499 = $4,497 &mdash; fits within the IRS Section 127 annual $5,250 tax-free cap. Complete the full series in one year.</p>
+                    </div>
+                    <div class="bundle-card">
+                        <div class="bundle-label">Complete Series Bundle</div>
+                        <div class="bundle-price">$3,999</div>
+                        <div class="bundle-savings">All 3 certificates &mdash; ~11% savings</div>
+                        <p class="bundle-detail">Still within IRS Section 127 annual cap. Includes $1,500 MS scholarship ($500 &times; 3).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== NEXT STEPS ===== -->
+    <section class="section" id="next-steps">
+        <div class="container">
+            <div class="fade-up text-center">
+                <span class="section-label">Section 7</span>
+                <h2 class="section-title">Immediate Next Steps</h2>
+                <p class="section-subtitle mx-auto">
+                    The window to establish NYIT as the premier &ldquo;Agentic FinTech&rdquo; educator in NYC
+                    is open. By 2028, these skills will be table stakes.
+                </p>
+                <div class="divider center"></div>
+            </div>
+            <div class="steps-grid fade-up">
+                <div class="step-card"><div class="step-number">1</div><h4>Validate Curriculum</h4><p>Convene an Industry Advisory Board of NYC FinTech leaders to review the three certificates and ensure alignment with hiring needs.</p></div>
+                <div class="step-card"><div class="step-number">2</div><h4>Launch Certificate 1</h4><p>AI Foundations for Financial Professionals (5 weeks) is the natural MVP &mdash; lowest barrier, broadest audience, fastest to market.</p></div>
+                <div class="step-card"><div class="step-number">3</div><h4>Scale to Certificates 2 &amp; 3</h4><p>Use Certificate 1 enrollment data and feedback to refine the Operations and Strategy curricula before launch.</p></div>
+                <div class="step-card"><div class="step-number">4</div><h4>Connect to MS Pipeline</h4><p>Leverage the existing MS in FinTech &amp; Financial Data Analytics as the immediate conversion pathway. Formalize the $500-per-certificate scholarship.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <div class="closing-cta">
+        <div class="container">
+            <p class="cta-tagline">&ldquo;Don't wait for the algorithm to decide your career. Decide how you govern the algorithm.&rdquo;</p>
+            <h2>The Future of Finance is Agentic.<br>NYIT is Ready to Lead.</h2>
+            <p>Three progressive certificates. One MS pathway. By focusing on AI skill progression, targeting mid-career finance professionals, and building both applied skills and governance depth, NYIT addresses the most critical gap in the NYC FinTech education market.</p>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>NYIT Agentic FinTech Certificates &mdash; Strategic Blueprint 2025&ndash;2030<br>
+                <span style="color: rgba(255,255,255,0.3);">Prepared for the Office of the Dean &bull; New York Institute of Technology &bull; <a href="https://www.nyit.edu" target="_blank" rel="noopener">nyit.edu</a></span>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleModules(btn) { var list = btn.nextElementSibling; btn.classList.toggle('open'); list.classList.toggle('open'); }
+        document.getElementById('navToggle').addEventListener('click', function() { document.getElementById('navLinks').classList.toggle('open'); });
+        document.querySelectorAll('.nav-links a').forEach(function(link) { link.addEventListener('click', function() { document.getElementById('navLinks').classList.remove('open'); }); });
+        window.addEventListener('scroll', function() { var nav = document.getElementById('nav'); if (window.scrollY > 50) { nav.classList.add('scrolled'); } else { nav.classList.remove('scrolled'); } });
+        var observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    entry.target.querySelectorAll('.bar-fill, .roi-bar').forEach(function(bar) { setTimeout(function() { bar.classList.add('animated'); }, 200); });
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        document.querySelectorAll('.fade-up').forEach(function(el) { observer.observe(el); });
+        document.querySelectorAll('.bar-chart, .roi-chart').forEach(function(el) { observer.observe(el); });
+        var sections = document.querySelectorAll('section[id]');
+        window.addEventListener('scroll', function() {
+            var scrollPos = window.scrollY + 100;
+            sections.forEach(function(section) {
+                var top = section.offsetTop, height = section.offsetHeight, id = section.getAttribute('id');
+                var link = document.querySelector('.nav-links a[href="#' + id + '"]');
+                if (link) { if (scrollPos >= top && scrollPos < top + height) { document.querySelectorAll('.nav-links a').forEach(function(a) { a.classList.remove('active'); }); link.classList.add('active'); } }
+            });
+        });
+    </script>
+</body>
+</html>
